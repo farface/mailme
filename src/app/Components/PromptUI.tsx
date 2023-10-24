@@ -5,8 +5,9 @@ import TopicList from "./TopicList";
 import UserInformation from "./UserInformation";
 import { questions } from "@/data/data";
 import InstructionsComp from "../Components/InstructionsComp";
-import SubmitButton from "./SubmitButton";
 import { useRouter } from "next/navigation";
+import api from "../api/emails";
+import { Trykker } from "next/font/google";
 
 const PromptUI = () => {
   const [view, setView] = useState({
@@ -25,21 +26,25 @@ const PromptUI = () => {
   const [topic, setTopic] = useState(0);
   const navigate = useRouter();
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    /* change to clear after Post Request */
-    setUserData({
-      firstname: "",
-      lastname: "",
-      email: "",
-      date: "week",
-      answers: [] as string[],
-    });
-
-    navigate.push("/success");
+    try {
+      const response = await api.post("/email", userData);
+      console.log(response);
+      setUserData({
+        firstname: "",
+        lastname: "",
+        email: "",
+        date: "",
+        answers: [] as string[],
+      });
+      navigate.push("/success");
+    } catch (err: any) {
+      console.log(`Error: ${err.message}`);
+      navigate.push("/error");
+    }
   };
-  /*   add post request after form is submitted*/
 
   return (
     <form
@@ -48,6 +53,7 @@ const PromptUI = () => {
       onSubmit={(e) => handleSubmit(e)}
     >
       <InstructionsComp />
+
       {view.topic && <TopicList setView={setView} setTopic={setTopic} />}
       {view.prompt && (
         <Prompt

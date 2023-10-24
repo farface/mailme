@@ -1,0 +1,6 @@
+PORT=8080
+ATLAS_URI=mongodb+srv://mailme:ckwHse10zfKRf8tJ@cluster0.dwu9n7y.mongodb.net/?retryWrites=true&w=majority
+MAILJET_API_KEY=a02664fc4c1a582edb6c3437edda89e7
+MAILJET_API_SECRET=062af61a9ae0bb8570fdd438ffe5a9e8
+OPENAI_API_KEY=api-key - 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›
+
