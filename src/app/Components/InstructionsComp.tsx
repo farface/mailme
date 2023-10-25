@@ -13,7 +13,7 @@ const InstructionsComp = () => {
       <div className=" w-full min-h-full lg:w-[31rem] lg:h-[445px] text-black bg-inputBackgrounds hidden peer-hover:block peer-active:block absolute z-10">
         <h2 className="text-center ">Instructions</h2>
         <div className="mx-2">
-          Welcome to Mailme, it's as easy as 123!
+          Welcome to Mailme, it&#39;s as easy as 123!
           <div>1. Choose a Topic</div>
           <div>2. Answer the Questions</div>
           <div>
