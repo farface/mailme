@@ -9,7 +9,11 @@ const TopicList = ({ setView, setTopic }: TopicProps) => {
           key={topic.id}
           className="w-full h-12 border-b-2 first:border-t-2 border-buttonBottomBorder hover:bg-activeBackground uppercase"
           onClick={() => {
-            setView({ topic: false, prompt: true, userInfo: false });
+            setView({
+              topic: false,
+              prompt: true,
+              userInfo: false,
+            });
             setTopic(topic.id);
           }}
         >

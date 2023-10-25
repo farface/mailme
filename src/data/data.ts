@@ -6,7 +6,13 @@ export const topics = [
   { id: 4, name: "Surprise" },
 ] as const;
 
-export const dates = ["week", "month", "surprise me"] as const;
+export const dates = [
+  { value: "1week", name: "1 week" },
+  { value: "2week", name: "2 weeks" },
+  { value: "1month", name: "1 month" },
+  { value: "surprise", name: "surprise me" },
+  { value: "x", name: "Demo" },
+] as const;
 
 export const questions = [
   [

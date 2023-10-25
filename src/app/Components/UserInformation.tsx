@@ -52,8 +52,8 @@ const UserInformation = ({ userData, setUserData }: UserProps) => {
       >
         <option value="">Times</option>
         {dates.map((date) => (
-          <option key={date} value={date}>
-            {date}
+          <option key={date.name} value={date.value}>
+            {date.name}
           </option>
         ))}
       </select>

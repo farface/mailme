@@ -1,14 +1,14 @@
-"use client";
-import { FormEvent, useState } from "react";
+import { Dispatch, FormEvent, SetStateAction, useState } from "react";
 import Prompt from "./Prompt";
 import TopicList from "./TopicList";
 import UserInformation from "./UserInformation";
 import { questions } from "@/data/data";
 import InstructionsComp from "../Components/InstructionsComp";
-import SubmitButton from "./SubmitButton";
 import { useRouter } from "next/navigation";
+import api from "../api/emails";
+import { PromptUIProps } from "../types/types";
 
-const PromptUI = () => {
+const PromptUI = ({ setLoading }: PromptUIProps) => {
   const [view, setView] = useState({
     topic: true,
     prompt: false,
@@ -22,24 +22,33 @@ const PromptUI = () => {
     date: "",
     answers: [] as string[],
   });
+
   const [topic, setTopic] = useState(0);
   const navigate = useRouter();
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    /* change to clear after Post Request */
-    setUserData({
-      firstname: "",
-      lastname: "",
-      email: "",
-      date: "week",
-      answers: [] as string[],
-    });
+    const newAnswer = userData.answers.join("\n");
+    const newResponse = { ...userData, answers: newAnswer, topic: topic };
 
-    navigate.push("/success");
+    setLoading(true);
+    try {
+      await api.post("/email", newResponse);
+
+      setUserData({
+        firstname: "",
+        lastname: "",
+        email: "",
+        date: "",
+        answers: [] as string[],
+      });
+      setTopic(0);
+      navigate.push("/success");
+    } catch (err: any) {
+      navigate.push("/error");
+    }
   };
-  /*   add post request after form is submitted*/
 
   return (
     <form
@@ -48,6 +57,7 @@ const PromptUI = () => {
       onSubmit={(e) => handleSubmit(e)}
     >
       <InstructionsComp />
+
       {view.topic && <TopicList setView={setView} setTopic={setTopic} />}
       {view.prompt && (
         <Prompt
