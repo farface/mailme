@@ -69,3 +69,7 @@ export type ButtonProps = {
     date: string;
   };
 };
+
+export type PromptUIProps = {
+  setLoading: Dispatch<SetStateAction<boolean>>;
+};

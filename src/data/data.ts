@@ -11,6 +11,7 @@ export const dates = [
   { value: "2week", name: "2 weeks" },
   { value: "1month", name: "1 month" },
   { value: "surprise", name: "surprise me" },
+  { value: "x", name: "Demo" },
 ] as const;
 
 export const questions = [

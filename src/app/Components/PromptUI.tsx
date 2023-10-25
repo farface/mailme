@@ -1,5 +1,4 @@
-"use client";
-import { FormEvent, useState } from "react";
+import { Dispatch, FormEvent, SetStateAction, useState } from "react";
 import Prompt from "./Prompt";
 import TopicList from "./TopicList";
 import UserInformation from "./UserInformation";
@@ -7,9 +6,9 @@ import { questions } from "@/data/data";
 import InstructionsComp from "../Components/InstructionsComp";
 import { useRouter } from "next/navigation";
 import api from "../api/emails";
-import { Trykker } from "next/font/google";
+import { PromptUIProps } from "../types/types";
 
-const PromptUI = () => {
+const PromptUI = ({ setLoading }: PromptUIProps) => {
   const [view, setView] = useState({
     topic: true,
     prompt: false,
@@ -23,15 +22,20 @@ const PromptUI = () => {
     date: "",
     answers: [] as string[],
   });
+
   const [topic, setTopic] = useState(0);
   const navigate = useRouter();
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
+    const newAnswer = userData.answers.join("\n");
+    const newResponse = { ...userData, answers: newAnswer, topic: topic };
+
+    setLoading(true);
     try {
-      const response = await api.post("/email", userData);
-      console.log(response);
+      await api.post("/email", newResponse);
+
       setUserData({
         firstname: "",
         lastname: "",
@@ -39,9 +43,9 @@ const PromptUI = () => {
         date: "",
         answers: [] as string[],
       });
+      setTopic(0);
       navigate.push("/success");
     } catch (err: any) {
-      console.log(`Error: ${err.message}`);
       navigate.push("/error");
     }
   };

@@ -29,11 +29,11 @@ const InstructionsComp = () => {
           <div className="mt-4">
             To build this web app we used,
             <div>Frontend: Nextjs, Typescript, and Tailwind.</div>
-            <div>Backend: Nodejs, Expressjs, Mongoose, and Typescript </div>
+            <div>Backend: Nodejs, Expressjs, and Typescript </div>
             <div>Database: MongoDB </div>
             <div>
-              Packages: nodemailer (for sending email) *this (for scheduling
-              emails) and Open AI (to generate email body)
+              Packages: Mailjet (for sending email) Agenda (for scheduling
+              emails) and ChatGPT-3.5 (to generate email body)
             </div>
           </div>
         </div>
