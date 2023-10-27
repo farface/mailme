@@ -19,7 +19,7 @@ export default function Home() {
             <h2 className="text-center uppercase mb-12">
               Send an AI generated email to your future self
             </h2>
-            <div className="flex flex-col lg:flex-row lg:justify-around lg:mx-auto relative">
+            <div className="flex flex-col lg:flex-row lg:justify-around lg:mx-auto px-2 lg:p-0 relative">
               <PromptUI setLoading={setLoading} />
               <Image
                 src={mailBox}
@@ -32,7 +32,7 @@ export default function Home() {
           </div>
         )}
       </main>
-      <footer className="md:absolute md:bottom-0 md:left-1/2 md:-translate-x-1/2 pb-4">
+      <footer className="lg:absolute lg:bottom-0 lg:left-1/2 lg:-translate-x-1/2 pb-4">
         <Footer />
       </footer>
     </>
